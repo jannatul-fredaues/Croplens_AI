@@ -1,0 +1,58 @@
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# ---------- Secrets & local config ----------
+.env
+.env.*
+!.env.example
+
+# ---------- Data (never commit raw or processed images) ----------
+data/*
+!data/README.md
+
+# ---------- Training artifacts ----------
+runs/
+logs/
+checkpoints/
+*.ckpt
+wandb/
+tensorboard/
+models/**/checkpoints/
+# Final exported models (e.g. models/v1/) ARE committed
+
+# ---------- Notebooks ----------
+.ipynb_checkpoints/
+
+# ---------- Test / tooling caches ----------
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# ---------- Node / Vercel ----------
+node_modules/
+.vercel/
+
+# ---------- Docker ----------
+docker-compose.override.yml
+
+# ---------- Editors / OS ----------
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# ---------- Misc ----------
+*.log
+tmp/
