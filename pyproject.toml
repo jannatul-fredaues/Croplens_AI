@@ -1,0 +1,32 @@
+# Tool configuration only (this repo is not published as a Python package).
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["training/notebooks", ".venv", "venv"]
+
+[tool.ruff.lint]
+# E/W: pycodestyle, F: pyflakes, I: import sorting, UP: modern syntax,
+# B: likely bugs, SIM: simplifications
+select = ["E", "W", "F", "I", "UP", "B", "SIM"]
+ignore = [
+    "B008",  # FastAPI uses function calls in defaults (Depends, File)
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# lets tests do `from app.main import app`
+pythonpath = ["api"]
+addopts = "-ra -q"
+markers = [
+    "slow: tests that load the real model (deselect with -m 'not slow')",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
