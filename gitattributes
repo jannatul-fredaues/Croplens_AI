@@ -1,0 +1,34 @@
+# Normalize line endings: store as LF in the repo, checkout per platform
+* text=auto
+
+# Files that must always use LF (breaks in Docker/Linux otherwise)
+*.sh         text eol=lf
+Dockerfile   text eol=lf
+Makefile     text eol=lf
+*.py         text eol=lf
+*.yml        text eol=lf
+*.yaml       text eol=lf
+
+# Binary files (no diffing or merging)
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.keras binary
+*.h5    binary
+*.tflite binary
+
+# Keep notebooks out of language statistics and diffs
+*.ipynb linguist-documentation
+
+# ---------------------------------------------------------------
+# Git LFS for large model files. OFF by default.
+# A MobileNetV2 model (~10-15 MB) is fine to commit directly.
+# Only enable these if you switch to a large model, and run
+# `git lfs install` first. Note: some build hosts do not fetch LFS
+# files during Docker builds, so test your deploy before relying on it.
+# ---------------------------------------------------------------
+# *.keras  filter=lfs diff=lfs merge=lfs -text
+# *.h5     filter=lfs diff=lfs merge=lfs -text
+# *.tflite filter=lfs diff=lfs merge=lfs -text
