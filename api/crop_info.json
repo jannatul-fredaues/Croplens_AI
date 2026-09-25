@@ -1,0 +1,27 @@
+{
+  "_readme": "Keyed by the exact class label your model outputs (must match labels.json from training/export.py). TODO: rename keys below to match your real labels if different, and adjust the source list for your specific varieties.",
+
+  "black_cumin": {
+    "season": "Cool-season annual. Sow in early spring (or autumn in mild climates); flowers in early summer, seed pods mature by mid-to-late summer.",
+    "water": "Medium. Water regularly while establishing; established plants tolerate short dry spells. Avoid waterlogged soil.",
+    "harvest": "Harvest seed pods once they dry and turn brown/black, before they split open, roughly 3-4 months after sowing.",
+    "npk": "Low nutrient demand. Fertilize only if soil is visibly poor; if needed, a light nitrogen feed is usually enough. Avoid heavy feeding.",
+    "source": "General horticultural references on Nigella sativa cultivation (e.g. hortiedu.uniag.sk); verify against your local extension guidance before publishing."
+  },
+
+  "sweet_pea": {
+    "season": "Cool-season annual. Sow in early spring (or autumn in mild-winter climates for an earlier bloom); flowers through late spring into summer.",
+    "water": "Medium to high, especially once flowering starts. Keep soil consistently moist but not waterlogged; mulch helps retain moisture.",
+    "harvest": "Not typically grown for food; harvest as cut flowers by picking blooms regularly (every 2-3 days) to encourage more flowering. Seeds are mildly toxic if eaten - note this in the UI if the audience includes home gardeners.",
+    "npk": "Low nitrogen, moderate phosphorus/potassium. Too much nitrogen produces foliage at the expense of flowers. A bloom-booster (higher P-K) feed works well once buds form.",
+    "source": "General horticultural references on Lathyrus odoratus cultivation; verify against your local extension guidance before publishing."
+  },
+
+  "onion": {
+    "season": "Cool-season biennial grown as an annual. Plant in early spring (or autumn for overwintering varieties in mild climates).",
+    "water": "Medium, consistent moisture, about 2.5 cm (1 in) per week. Reduce watering in the final 2-3 weeks before harvest to help bulbs cure.",
+    "harvest": "Ready in roughly 90-120 days, when the leafy tops yellow and fall over. Cure bulbs in a dry, well-ventilated spot for 1-2 weeks before storage.",
+    "npk": "Moderate nitrogen early for leaf growth, then shift to phosphorus/potassium as bulbs form. Stop nitrogen once bulbing begins, since excess nitrogen delays maturity.",
+    "source": "General horticultural references on Allium cepa cultivation; verify against your local extension guidance before publishing."
+  }
+}
