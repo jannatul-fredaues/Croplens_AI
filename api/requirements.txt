@@ -1,0 +1,23 @@
+# Serving only. Do NOT add training libraries here (albumentations, rembg,
+# matplotlib, jupyter, etc.) - those belong in training/requirements.txt.
+# Keeping this lean means faster Docker builds and a smaller image, which
+# matters on free-tier hosts with limited RAM.
+
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+pydantic==2.9.2
+pydantic-settings==2.5.2
+python-multipart==0.0.9    # required by FastAPI to parse file uploads
+
+pillow==10.4.0
+numpy==1.26.4
+
+# tensorflow-cpu is smaller than the full `tensorflow` package and this
+# service never trains, only loads a model and predicts.
+# If the free-tier host still runs out of memory, convert the model to
+# TFLite in training/export.py and swap this for `tflite-runtime` instead -
+# it is far lighter.
+tensorflow-cpu==2.17.0
+
+# Optional, wire up in main.py only if you set SENTRY_DSN:
+# sentry-sdk[fastapi]==2.14.0
