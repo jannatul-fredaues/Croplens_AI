@@ -1,0 +1,22 @@
+# Full training stack. Do NOT install this in the API's Docker image -
+# it is far heavier than api/requirements.txt needs for serving.
+# Meant to run in Google Colab or a local machine, never deployed.
+
+tensorflow==2.17.0 # Colab has this preinstalled; listed for local setup
+pyyaml==6.0.2
+
+pillow==10.4.0
+numpy==1.26.4
+opencv-python-headless==4.10.0.84
+
+scikit-learn==1.5.2
+pandas==2.2.3
+matplotlib==3.9.2
+seaborn==0.13.2
+
+tqdm==4.66.5
+
+# Background removal for prepare_data.py. Optional at runtime (the script
+# skips this step gracefully if not installed) but heavy - pulls in
+# onnxruntime. Comment out if you don't need it and want a faster install.
+rembg==2.0.59
