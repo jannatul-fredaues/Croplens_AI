@@ -1,0 +1,62 @@
+# Single source of truth for the training pipeline. Every script
+# (prepare_data.py, train.py, evaluate.py, export.py) reads this file
+# instead of hardcoding paths or hyperparameters.
+#
+# TODO: confirm `data.classes` matches your real folder names under
+# data.raw_dir exactly (case-sensitive).
+
+seed: 42
+
+data:
+  raw_dir: data/raw # data/raw/<class_name>/*.jpg  (not committed to git)
+  processed_dir: data/processed # created by prepare_data.py
+  classes: [black_cumin, sweet_pea, onion]
+  split: { train: 0.70, val: 0.15, test: 0.15 }
+  min_images_per_class: 20 # warn if a class has fewer than this
+  clean_background: true # add background-removed copies to the TRAIN split only
+  # (val/test stay as untouched real photos, so metrics reflect real-world use)
+
+image:
+  size: [224, 224] # [height, width]
+
+train:
+  batch_size: 32
+  epochs_head: 15 # phase 1: base frozen, train the classification head
+  epochs_fine_tune: 10 # phase 2: unfreeze top layers, train at low LR
+  fine_tune_at_layer: 100 # unfreeze from this MobileNetV2 layer index onward
+  learning_rate_head: 0.001
+  learning_rate_fine_tune: 0.00001
+  dropout: 0.3
+  label_smoothing: 0.1
+  early_stopping_patience: 5
+
+augmentation:
+  random_flip: horizontal
+  random_rotation: 0.08 # fraction of 2*pi
+  random_zoom: 0.1
+  random_contrast: 0.1
+  # Applied as Keras layers baked into the model itself, so they run
+  # automatically during training and are a no-op at inference -
+  # no separate augmentation code needed in the API.
+
+threshold_search:
+  # Confidence threshold is chosen by hand from this report (Day 3),
+  # not decided automatically - see evaluate.py.
+  candidates: [0.50, 0.60, 0.70, 0.75, 0.80, 0.85, 0.90]
+
+paths:
+  checkpoint_dir: training/checkpoints # gitignored; local/Colab only
+  best_checkpoint: training/checkpoints/best.keras
+  history_path: training/checkpoints/history.json
+  labels_path: training/checkpoints/labels.json
+  class_counts_path: training/checkpoints/class_counts.json
+
+  model_out: models/v1/croplens_v1.keras
+  labels_out: models/v1/labels.json
+  metrics_out: models/v1/metrics.json
+  model_card_out: models/v1/MODEL_CARD.md
+  model_version: v1
+
+  confusion_matrix_out: docs/results/confusion_matrix.png
+  threshold_report_out: docs/results/threshold_search.json
+  gradcam_dir: docs/results/gradcam
